@@ -1,11 +1,5 @@
-INPUTS = {
-  sample: 'sample_in.txt',
-  default: 'in.txt',
-}.freeze
-
-def input(path)
-  File.read(path).split
-end
+require '../lib'
+include Lib::IO
 
 def part1(input)
   initial = {
@@ -38,7 +32,5 @@ def part2(input)
   part1(summed[:list])
 end
 
-in_file = INPUTS[ARGV[0]&.to_sym || :default]
-
-puts part1(input(in_file))
-puts part2(input(in_file))
+puts part1(read_input_lines)
+puts part2(read_input_lines)

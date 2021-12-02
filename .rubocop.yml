@@ -14,7 +14,13 @@ AllCops:
 Metrics/MethodLength:
   Enabled: false
 
+Style/Documentation:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/MixinUsage:
   Enabled: false
 
 Style/TrailingCommaInArguments:
