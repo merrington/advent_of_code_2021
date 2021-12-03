@@ -7,7 +7,7 @@ module Lib
 
     def read_input_lines
       path = INPUTS[ARGV[0]&.to_sym || :default]
-      File.readlines(path)
+      File.readlines(path, chomp: true)
     end
   end
 end
