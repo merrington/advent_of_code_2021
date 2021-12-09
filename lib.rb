@@ -2,13 +2,8 @@ require 'pry'
 
 module Lib
   module IO
-    INPUTS = {
-      sample: 'sample_in.txt',
-      default: 'in.txt',
-    }.freeze
-
     def read_input_lines
-      path = INPUTS[ARGV[0]&.to_sym || :default]
+      path = "#{ARGV[0] || 'in'}.txt"
       File.readlines(path, chomp: true)
     end
   end
