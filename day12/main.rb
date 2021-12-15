@@ -3,11 +3,10 @@ require '../lib'
 include Lib::IO
 
 class Node
-  attr_accessor :children, :parents, :metadata
+  attr_accessor :children, :metadata
 
-  def initialize(children: [], parents: [], metadata: {})
+  def initialize(children: [], metadata: {})
     @children = children
-    @parents = parents
     @metadata = metadata
   end
 
@@ -32,7 +31,7 @@ def part1(input)
     map[stop] ||= Node.new(metadata: { name: stop, size: stop.match?(stop.upcase) ? LARGE : SMALL })
 
     map[start].children << map[stop]
-    map[stop].parents << map[start]
+    map[stop].children << map[start]
   end
 
   paths = next_node(map[START_NODE], [])
@@ -46,7 +45,7 @@ end
 
 def next_node(node, path, visited = {})
   path = Array.new(path) << node.metadata[:name]
-  if node.metadata[:size] == SMALL
+  if node.metadata[:size] == SMALL # only need to track visited for small nodes
     visited[node.metadata[:name]] ||= 0
     visited[node.metadata[:name]] += 1
   end
@@ -54,7 +53,7 @@ def next_node(node, path, visited = {})
   # if it's the stop node return the current path
   return path.join(',') if node.metadata[:name] == STOP_NODE
 
-  available_nodes = [].concat(node.children, node.parents).select do |child|
+  available_nodes = node.children.select do |child|
     next false if child.metadata[:name] == START_NODE
     next true if child.metadata[:name] == STOP_NODE
 
