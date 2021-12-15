@@ -1,0 +1,4 @@
+start-A
+A-b
+b-end
+A-end
